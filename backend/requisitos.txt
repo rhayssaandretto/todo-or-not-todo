@@ -1,0 +1,18 @@
+Endpoints obrigatórios:
+GET /todos – Listar todas as tarefas
+
+GET /todos/:id – Buscar uma tarefa pelo ID
+
+POST /todos – Criar uma nova tarefa
+
+PUT /todos/:id – Atualizar uma tarefa existente
+
+DELETE /todos/:id – Excluir uma tarefa
+
+Requisitos Técnicos:
+
+Estrutura organizada com modules, controllers e services
+
+Validação básica dos dados de entrada (DTOs e Pipes)
+
+Banco de dados (opcional): pode ser em memória ou um banco de dados real (como PostgreSQL ou MongoDB)
