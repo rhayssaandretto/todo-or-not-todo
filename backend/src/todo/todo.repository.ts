@@ -16,9 +16,9 @@ export class TodoRepository implements IContractRepository<Todo> {
     return await this.model.findById(id).exec();
   }
 
-  async create(data: Todo): Promise<void> {
+  async create(data: Todo): Promise<Todo> {
     const newTodo = new this.model(data);
-    await newTodo.save();
+    return await newTodo.save();
   }
 
   async update(id: string, data: Partial<Todo>): Promise<Todo | null> {

@@ -9,10 +9,10 @@ export class Todo {
   title: string;
 
   @Prop()
-  description: string;
+  description?: string;
 
-  @Prop({ default: false })
-  completed: boolean;
+  @Prop()
+  isCompleted: boolean;
 }
 
 export const TodoSchema = SchemaFactory.createForClass(Todo);
