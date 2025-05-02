@@ -1,7 +1,6 @@
+import { TodoModule } from './todo/todo.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { TodoController } from './todo/todo.controller';
-import { TodoService } from './todo/todo.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
@@ -14,8 +13,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         uri: configService.get<string>('DATABASE_URI'),
       }),
     }),
+    TodoModule,
   ],
-  controllers: [TodoController],
-  providers: [TodoService],
 })
-export class TodoModule {}
+export class AppModule {}

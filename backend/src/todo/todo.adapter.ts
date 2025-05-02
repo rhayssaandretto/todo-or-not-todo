@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import Adapter from 'src/common/adapter/adapter';
-import { CreateTodoDto } from './dtos/create-todo.dto';
 import { UpdateTodoDto } from './dtos/update-todo';
 import { Todo } from './schema/todo.schema';
+import { TodoDto } from './dtos/todo.dto';
 
 @Injectable()
 export default class TodoAdapter
-  implements Adapter<Todo, CreateTodoDto, UpdateTodoDto>
+  implements Adapter<Todo, TodoDto, UpdateTodoDto>
 {
   public updateToEntity(dto: UpdateTodoDto): Todo {
     return {
       title: dto.title,
       description: dto.description,
-      completed: dto.completed,
+      isCompleted: dto.isCompleted,
     } as Todo;
   }
 
-  public createToEntity(dto: CreateTodoDto): Todo {
+  public createToEntity(dto: TodoDto): Todo {
     return {
       title: dto.title,
       description: dto.description,
-      completed: dto.completed,
-    } as Todo;
+      isCompleted: dto.isCompleted,
+    };
+  }
+
+  entityToDto(entity: Todo): TodoDto {
+    return {
+      title: entity.title,
+      description: entity.description,
+      isCompleted: entity.isCompleted,
+    };
   }
 }
