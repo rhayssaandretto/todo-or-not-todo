@@ -11,7 +11,7 @@ export class Todo {
   @Prop()
   description?: string;
 
-  @Prop()
+  @Prop({ default: false })
   isCompleted: boolean;
 }
 
