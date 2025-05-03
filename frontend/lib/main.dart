@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'app_imports.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ServiceLocator.setupServiceLocator();
   runApp(const MyApp());
 }
 
@@ -9,10 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'ToDo List',
+    return MaterialApp.router(
+      title: 'To-Do List',
       debugShowCheckedModeBanner: false,
-      //  home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routerConfig: GoRouterSystem.router,
     );
   }
 }
