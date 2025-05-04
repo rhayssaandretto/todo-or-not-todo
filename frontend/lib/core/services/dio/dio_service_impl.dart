@@ -72,7 +72,6 @@ class DioFactory {
       BaseOptions(
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
-        sendTimeout: const Duration(seconds: 30),
         responseType: ResponseType.json,
         validateStatus: (status) =>
             status != null && status >= 200 && status < 300,

@@ -12,7 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'To-Do List',
+      title: 'What TODO today? ¯\\_(ツ)_/¯',
+      theme: ThemeData(
+        textTheme: GoogleFonts.schoolbellTextTheme(),
+      ),
       debugShowCheckedModeBanner: false,
       routerConfig: GoRouterSystem.router,
     );

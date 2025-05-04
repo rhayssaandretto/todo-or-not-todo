@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:frontend/modules/modules_imports.dart';
-import 'package:frontend/modules/tasks_list/domain/repositories/task_repository.dart';
-import 'package:frontend/modules/tasks_list/infra/datasources/task_datasource.dart';
 
 class TaskRepositoryImpl implements ITaskRepository {
   final ITaskDatasource _datasource;

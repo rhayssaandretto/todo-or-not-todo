@@ -1,16 +1,21 @@
 import 'package:frontend/app_imports.dart';
-import 'package:frontend/modules/tasks_list/infra/datasources/task_datasource.dart';
 
 class TaskDatasourceImpl implements ITaskDatasource {
   final IDioService service;
 
   TaskDatasourceImpl(this.service);
 
+
+// TODO: colocar urls na env
+
+
   @override
   Future<void> addTask(Map<String, dynamic> task) async {
     try {
       await service.restRequest(
-          url: '/todos', method: DioMethodsEnum.post, body: task);
+          url: 'http://localhost:3000/todos',
+          method: DioMethodsEnum.post,
+          body: task);
     } catch (_) {
       rethrow;
     }
@@ -20,7 +25,9 @@ class TaskDatasourceImpl implements ITaskDatasource {
   Future<void> deleteTask(String id) async {
     try {
       await service.restRequest(
-          url: '/todos', method: DioMethodsEnum.delete, query: {'id': id});
+        url: 'http://localhost:3000/todos/$id',
+        method: DioMethodsEnum.delete,
+      );
     } catch (_) {
       rethrow;
     }
@@ -29,8 +36,8 @@ class TaskDatasourceImpl implements ITaskDatasource {
   @override
   Future<String> getAllTasks() async {
     try {
-      final response =
-          await service.restRequest(url: '/todos', method: DioMethodsEnum.get);
+      final response = await service.restRequest(
+          url: 'http://localhost:3000/todos', method: DioMethodsEnum.get);
       return response ?? '';
     } catch (_) {
       rethrow;
@@ -41,7 +48,9 @@ class TaskDatasourceImpl implements ITaskDatasource {
   Future<String> getTaskById(String id) async {
     try {
       final response = await service.restRequest(
-          url: '/todos', method: DioMethodsEnum.get, query: {'id': id});
+        url: 'http://localhost:3000/todos/$id',
+        method: DioMethodsEnum.get,
+      );
       return response ?? '';
     } catch (_) {
       rethrow;
@@ -52,9 +61,13 @@ class TaskDatasourceImpl implements ITaskDatasource {
   Future<void> updateTask(Map<String, dynamic> task) async {
     try {
       await service.restRequest(
-          url: '/todos', method: DioMethodsEnum.put, query: {'id': task['id']}, body: task);
+          url: 'http://localhost:3000/todos/${task['id']}',
+          method: DioMethodsEnum.put,
+          body: task);
     } catch (_) {
       rethrow;
     }
   }
 }
+
+

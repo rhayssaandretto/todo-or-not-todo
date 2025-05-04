@@ -25,7 +25,7 @@ class GoRouterSystem {
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: TaskListsPage.name,
-        builder: (context, state) => const TaskListsPage(),
+        builder: (context, state) =>  TaskListsPage(),
       ),
     ],
   );

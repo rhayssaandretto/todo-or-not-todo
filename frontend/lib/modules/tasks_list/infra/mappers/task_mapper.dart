@@ -3,9 +3,8 @@ import 'package:frontend/modules/modules_imports.dart';
 class TaskMapper {
   static TaskEntity fromJson(Map<String, dynamic> json) {
     return TaskEntity(
-      id: json['id'] as String,
+      id: (json['id'] ?? json['_id']) as String,
       title: json['title'] as String,
-      description: json['description'] as String,
       isCompleted: json['isCompleted'] as bool? ?? false,
     );
   }
@@ -14,7 +13,6 @@ class TaskMapper {
     return {
       'id': task.id,
       'title': task.title,
-      'description': task.description,
       'isCompleted': task.isCompleted,
     };
   }

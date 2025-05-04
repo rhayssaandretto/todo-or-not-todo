@@ -3,6 +3,8 @@ export 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 export 'package:dio/dio.dart';
 export 'package:get_it/get_it.dart';
 export 'package:go_router/go_router.dart';
+export 'package:google_fonts/google_fonts.dart';
+
 
 export 'package:flutter/foundation.dart';
 export 'package:flutter/material.dart';
