@@ -11,7 +11,6 @@ export default class TodoAdapter
   public updateToEntity(dto: UpdateTodoDto): Todo {
     return {
       title: dto.title,
-      description: dto.description,
       isCompleted: dto.isCompleted,
     } as Todo;
   }
@@ -19,7 +18,6 @@ export default class TodoAdapter
   public createToEntity(dto: TodoDto): Todo {
     return {
       title: dto.title,
-      description: dto.description,
       isCompleted: dto.isCompleted,
     };
   }
@@ -27,7 +25,6 @@ export default class TodoAdapter
   entityToDto(entity: Todo): TodoDto {
     return {
       title: entity.title,
-      description: entity.description,
       isCompleted: entity.isCompleted,
     };
   }
