@@ -11,21 +11,21 @@ export default class TodoAdapter
   public updateToEntity(dto: UpdateTodoDto): Todo {
     return {
       title: dto.title,
-      isCompleted: dto.isCompleted,
+      isCompleted: dto.isCompleted ?? false,
     } as Todo;
   }
 
   public createToEntity(dto: TodoDto): Todo {
     return {
       title: dto.title,
-      isCompleted: dto.isCompleted,
+      isCompleted: dto.isCompleted ?? false,
     };
   }
 
   entityToDto(entity: Todo): TodoDto {
     return {
       title: entity.title,
-      isCompleted: entity.isCompleted,
+      isCompleted: entity.isCompleted ?? false,
     };
   }
 }

@@ -6,6 +6,5 @@ export class TodoDto {
   title: string;
 
   @IsBoolean()
-  @IsNotEmpty()
   isCompleted: boolean;
 }
