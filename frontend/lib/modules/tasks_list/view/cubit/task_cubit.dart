@@ -5,14 +5,13 @@ part 'task_state.dart';
 class TaskCubit extends Cubit<TaskState> {
   final ITaskRepository taskRepository;
 
-// TODO: tirar consoles
-
   TaskCubit(this.taskRepository) : super(TaskInitial());
 
   Future<void> fetchTasks() async {
     emit(TaskLoading());
     try {
       final tasks = await taskRepository.getAllTasks();
+
       emit(TaskLoaded(tasks));
     } catch (e) {
       emit(TaskError(e.toString()));
@@ -21,15 +20,13 @@ class TaskCubit extends Cubit<TaskState> {
 
   Future<void> addTask(TaskEntity task) async {
     try {
-      final json = TaskMapper.toJson(task);
-      debugPrint('Payload enviado para o backend: $json');
-
       await taskRepository.addTask(task);
-      emit(TaskAdded());
-      fetchTasks();
+
+      final currentState = state as TaskLoaded;
+      List<TaskEntity>.from(currentState.tasks).add(task);
+
+      await _updateList();
     } catch (e) {
-      debugPrint('Erro ao adicionar tarefa: $e');
-      debugPrint('Stack trace: ${StackTrace.current}');
       emit(TaskError(e.toString()));
     }
   }
@@ -40,13 +37,11 @@ class TaskCubit extends Cubit<TaskState> {
         await taskRepository.updateTask(task);
 
         final currentState = state as TaskLoaded;
-        final updatedTasks = currentState.tasks.map((t) {
+        final updatedTasksList = currentState.tasks.map((t) {
           return t.id == task.id ? task : t;
         }).toList();
 
-        emit(TaskLoaded(updatedTasks));
-        emit(TaskUpdated(task));
-        emit(TaskLoaded(updatedTasks));
+        emit(TaskUpdated(task, updatedTasksList));
       } catch (e) {
         emit(TaskError(e.toString()));
       }
@@ -59,12 +54,10 @@ class TaskCubit extends Cubit<TaskState> {
         await taskRepository.deleteTask(taskId);
 
         final currentState = state as TaskLoaded;
-        final updatedTasks =
+        final deletedTasksList =
             currentState.tasks.where((task) => task.id != taskId).toList();
 
-        emit(TaskLoaded(updatedTasks));
-        emit(TaskDeleted(taskId));
-        emit(TaskLoaded(updatedTasks));
+        emit(TaskDeleted(taskId, deletedTasksList));
       } catch (e) {
         emit(TaskError(e.toString()));
       }
@@ -78,13 +71,19 @@ class TaskCubit extends Cubit<TaskState> {
         await taskRepository.updateTask(updatedTask);
 
         final currentState = state as TaskLoaded;
-        final updatedTasks = currentState.tasks.map((t) {
+        final updatedTasksList = currentState.tasks.map((t) {
           return t.id == task.id ? updatedTask : t;
         }).toList();
-        emit(TaskLoaded(updatedTasks));
+
+        emit(TaskLoaded(updatedTasksList));
       } catch (e) {
         emit(TaskError(e.toString()));
       }
     }
+  }
+
+  Future<void> _updateList() async {
+    final newTaskList = await taskRepository.getAllTasks();
+    emit(TaskLoaded(newTaskList));
   }
 }

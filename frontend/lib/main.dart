@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'What TODO today? ¯\\_(ツ)_/¯',
+      title: 'What TODO today?',
       theme: ThemeData(
         textTheme: GoogleFonts.schoolbellTextTheme(),
       ),

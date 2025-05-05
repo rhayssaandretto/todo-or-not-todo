@@ -13,27 +13,27 @@ class TaskTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListTile(
-        title: Text(
-          task.title,
-          style: TextStyle(
-            decoration: task.isCompleted
-                ? TextDecoration.lineThrough
-                : TextDecoration.none,
-            color: task.isCompleted ? Colors.grey : Colors.black,
-            fontSize: screenWidth < 600 ? 16 : 20,
-          ),
+    return ListTile(
+      title: Text(
+        task.title,
+        style: TextStyle(
+          decoration: task.isCompleted
+              ? TextDecoration.lineThrough
+              : TextDecoration.none,
+          color: task.isCompleted ? Colors.grey : Colors.black,
+          fontSize: screenWidth < 600 ? 16 : 20,
         ),
-        leading: Checkbox(
-          value: task.isCompleted,
-          onChanged: (value) {
-            context.read<TaskCubit>().toggleCompletion(task);
-          },
-          activeColor: const Color(0xFFFFD1DC),
-        ),
-        onTap: () {
+      ),
+      leading: Checkbox(
+        value: task.isCompleted,
+        onChanged: (value) {
+          context.read<TaskCubit>().toggleCompletion(task);
+        },
+        activeColor: const Color(0xFFFFD1DC),
+      ),
+      trailing: IconButton(
+        icon: const Icon(Icons.more_vert),
+        onPressed: () {
           _showAddTodoBox(context);
         },
       ),

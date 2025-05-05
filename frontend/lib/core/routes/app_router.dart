@@ -1,5 +1,3 @@
-import 'package:frontend/modules/tasks_list/view/pages/pages_imports.dart';
-
 import '../../app_imports.dart';
 
 class GoRouterSystem {
@@ -15,7 +13,7 @@ class GoRouterSystem {
   static BuildContext? get ctx =>
       router.routerDelegate.navigatorKey.currentContext;
 
-  static const String initialRoutePath = TaskListsPage.name;
+  static const String initialRoutePath = HomePage.name;
 
   static GoRouter router = GoRouter(
     initialLocation: initialRoutePath,
@@ -24,8 +22,8 @@ class GoRouterSystem {
     routes: [
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
-        path: TaskListsPage.name,
-        builder: (context, state) =>  TaskListsPage(),
+        path: HomePage.name,
+        builder: (context, state) => const HomePage(),
       ),
     ],
   );

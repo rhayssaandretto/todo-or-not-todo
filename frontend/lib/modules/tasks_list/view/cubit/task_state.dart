@@ -18,16 +18,20 @@ class TaskError extends TaskState {
   TaskError(this.error);
 }
 
-class TaskAdded extends TaskState {}
+class TaskAdded extends TaskLoaded {
+  final TaskEntity addedTask;
 
-class TaskUpdated extends TaskState {
-  final TaskEntity updatedTask;
-
-  TaskUpdated(this.updatedTask);
+  TaskAdded(this.addedTask, super.tasks);
 }
 
-class TaskDeleted extends TaskState {
+class TaskUpdated extends TaskLoaded {
+  final TaskEntity updatedTask;
+
+  TaskUpdated(this.updatedTask, super.tasks);
+}
+
+class TaskDeleted extends TaskLoaded {
   final String deletedTaskId;
 
-  TaskDeleted(this.deletedTaskId);
+  TaskDeleted(this.deletedTaskId, super.tasks);
 }
